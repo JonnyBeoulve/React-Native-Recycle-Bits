@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "react-native-recycle-bits",
+    "description": "This is a React Native based mobile app for iOS and Android that will power RecycleBits, a product where users can take photos of objects to determine if they're recyclable or not, learn more information about recycling materials, and compete with other users for recycling the most every month. This concept earned second place at a hackathon and is now a side project for the team.",
+    "slug": "react-native-learning",
+    "privacy": "public",
+    "sdkVersion": "26.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
