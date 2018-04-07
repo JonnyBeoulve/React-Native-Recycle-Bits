@@ -8,4 +8,6 @@ Coming soon...
 * React Native
 
 ## Notes
-Coming soon...
+The repository for the hackathon project can be seen here:
+
+https://github.com/JonnyBeoulve/RecycleBits
