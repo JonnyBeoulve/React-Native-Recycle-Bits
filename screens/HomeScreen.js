@@ -17,27 +17,27 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  /*=================================================================================================
+  // The home page will render the logo, a clickable link to visit the scan page, the navigation
+  // bar, as well as a welcome message.
+  =================================================================================================*/
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/recycle-bits-logo.png')
-                  : require('../assets/images/recycle-bits-logo.png')
-              }
+              source={ require('../assets/images/Recycle-Bits-Logo.png')}
               style={styles.welcomeImage}
             />
           </View>
 
           <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpScanItem}>Scan a recyclable item.</Text>
+            <TouchableOpacity onPress={this._handleGitHubLink} style={styles.helpLink}>
+              <Text style={styles.helpScanItem}>Visit the GitHub for this project.</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </View>
 
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>Welcome!</Text>
@@ -46,40 +46,17 @@ export default class HomeScreen extends React.Component {
     );
   }
 
-  _maybeRenderDevelopmentModeWarning() {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
-        </Text>
-      );
-    } else {
-      return (
-        <Text style={styles.developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
-    }
-  }
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleScanItem = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
+  /*=================================================================================================
+  // This will direct the user to the GitHub for the project.
+  =================================================================================================*/
+  _handleGitHubLink = () => {
+    WebBrowser.openBrowserAsync('https://github.com/JonnyBeoulve/React-Native-Recycle-Bits');
   };
 }
 
+/*=================================================================================================
+// Home styling.
+=================================================================================================*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -101,8 +78,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 160,
-    height: 140,
+    width: 200,
+    height: 180,
     resizeMode: 'contain',
     marginTop: 140,
     marginLeft: -10,

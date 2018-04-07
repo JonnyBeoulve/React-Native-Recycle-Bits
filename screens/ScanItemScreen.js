@@ -1,18 +1,32 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {
+  Image,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default class ScanItemScreen extends React.Component {
   static navigationOptions = {
-    title: 'Scan Item',
+    header: null,
   };
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        <View style={styles.headerContainer}>
+          <Image
+            source={ require('../assets/images/Recycle_Bits_Black_Landscape.png')}
+            style={styles.headerLogoImage}
+          />
+        </View>
+
+        <View style={styles.scanContainer}>
+          <Text style={styles.scanButton}>Scan</Text>
+        </View>
       </ScrollView>
     );
   }
@@ -24,4 +38,41 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: '#fff',
   },
+  headerContainer: {
+    alignItems: 'center',
+    backgroundColor: '#9CC9A8',
+    height: 80,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  headerLogoImage: {
+    width: 260,
+    height: 70,
+    resizeMode: 'contain',
+    marginTop: 5,
+  },
+  scanContainer: {
+    height: 300,
+    marginTop: 300,
+    marginBottom: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: 'center',
+    backgroundColor: '#9CC9A8',
+    paddingVertical: 20,
+  },
+  scanButton: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center',
+  }
 });

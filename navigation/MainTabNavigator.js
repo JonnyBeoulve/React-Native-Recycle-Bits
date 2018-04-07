@@ -7,7 +7,7 @@ import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
 import ScanItemScreen from '../screens/ScanItemScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 export default TabNavigator(
   {
@@ -17,8 +17,8 @@ export default TabNavigator(
     ScanItem: {
       screen: ScanItemScreen,
     },
-    Settings: {
-      screen: SettingsScreen,
+    Profile: {
+      screen: ProfileScreen,
     },
   },
   {
@@ -30,15 +30,18 @@ export default TabNavigator(
           case 'Home':
             iconName =
               Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-information-circle';
+                ? `ios-home${focused ? '' : '-outline'}`
+                : 'md-home';
             break;
           case 'ScanItem':
-            iconName = Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link';
+            iconName = Platform.OS === 'ios' 
+              ? `ios-qr-scanner${focused ? '' : '-outline'}` 
+              : 'md-qr-scanner';
             break;
-          case 'Settings':
-            iconName =
-              Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
+          case 'Profile':
+            iconName = Platform.OS === 'ios' 
+              ? `ios-person${focused ? '' : '-outline'}` 
+              : 'md-person';
         }
         return (
           <Ionicons
