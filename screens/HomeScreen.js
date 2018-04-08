@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
@@ -32,10 +31,8 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this.handleGitHubLink} style={styles.helpLink}>
-              <Text style={styles.helpScanItem}>Visit the GitHub for this project.</Text>
-            </TouchableOpacity>
+          <View style={styles.recyclingFactContainer}>
+            <Text style={styles.recyclingFact}>In less than 15 years, worldwide waste is expected to double.</Text>
           </View>
         </View>
 
@@ -45,13 +42,6 @@ export default class HomeScreen extends React.Component {
       </View>
     );
   }
-
-  /*=================================================================================================
-  // This will direct the user to the GitHub for the project.
-  =================================================================================================*/
-  handleGitHubLink = () => {
-    WebBrowser.openBrowserAsync('https://github.com/JonnyBeoulve/React-Native-Recycle-Bits');
-  };
 }
 
 /*=================================================================================================
@@ -133,16 +123,19 @@ const styles = StyleSheet.create({
   navigationFilename: {
     marginTop: 5,
   },
-  helpContainer: {
-    marginTop: 15,
+  recyclingFactContainer: {
     alignItems: 'center',
+    backgroundColor: '#9CC9A8',
+    height: 120,
+    marginTop: 10,
+    marginBottom: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpScanItem: {
-    fontSize: 18,
+  recyclingFact: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 20,
     color: '#fff',
-    textDecorationLine: 'underline',
-  },
+  }
 });

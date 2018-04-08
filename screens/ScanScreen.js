@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     height: 80,
     marginTop: 10,
     marginBottom: 0,
+    borderBottomColor: '#00974E',
+    borderBottomWidth: 1,
   },
   headerLogoImage: {
     width: 260,

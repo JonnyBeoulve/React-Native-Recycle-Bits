@@ -8,6 +8,7 @@ import {
   View 
 } from 'react-native';
 import { Camera, Permissions } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class CameraComponent extends React.Component {
   /*=================================================================================================
@@ -33,11 +34,22 @@ export default class CameraComponent extends React.Component {
   /*=================================================================================================
   // Here we will first render a view depending upon whether or not the user has granted 
   // camera permissions. If so, the user will be able to user their camera to take a photo,
-  // flip the camera, and more.
+  // flip the camera, and turn on flash.
   =================================================================================================*/
   render() {
     const { hasCameraPermission } = this.state;
     const { scanned } = this.state;
+    let iconCameraFlip;
+    let iconCameraFlash;
+
+    iconCameraFlip = Platform.OS === 'ios' 
+      ? 'ios-switch'
+      : 'md-switch';
+
+    iconCameraFlash = Platform.OS === 'ios' 
+      ? 'ios-flash'
+      : 'md-flash';
+
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
@@ -48,7 +60,7 @@ export default class CameraComponent extends React.Component {
           <View style={styles.flex}>
             <Image source={require('../../assets/images/Coming_Soon.jpg')} style={styles.comingSoonImage}/>
             <View style={styles.comingSoonTextContainer}>
-              <Text style={styles.comingSoonText}>Coming Soon...</Text>
+              <Text onPress={this.handleScanAgain} style={styles.comingSoonText}>Coming Soon. Click to scan again.</Text>
              </View>
           </View>
         );
@@ -62,7 +74,10 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handleCameraFlip}
                   >
                   <Text style={styles.cameraPreviewOptionText1}>
-                    {' '}Flip{' '}
+                    {'  '}<Ionicons
+                      name={iconCameraFlip}
+                      size={17}
+                    />{'  '}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -70,7 +85,7 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handlePhotoScan}
                   >
                   <Text style={styles.cameraPreviewOptionText2}>
-                    {' '}Scan{' '}
+                    {' '}...{' '}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -78,7 +93,10 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handleFlashToggle}
                   >
                   <Text style={styles.cameraPreviewOptionText3}>
-                    {' '}Flash{' '}
+                    {'  '}<Ionicons
+                      name={iconCameraFlash}
+                      size={17}
+                    />{'  '}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -120,6 +138,16 @@ export default class CameraComponent extends React.Component {
         : Camera.Constants.Type.off,
     });
   }
+
+  /*=================================================================================================
+  // Upon arriving at the coming soon image, the user can press a button on the bottom to go back to the
+  // Scan screen
+  =================================================================================================*/
+  handleScanAgain = () => {
+    this.setState({
+      scanned: false
+    });
+  }
 }
 
 /*=================================================================================================
@@ -157,45 +185,57 @@ const styles = StyleSheet.create({
   },
   comingSoonText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: '#75CDDD',
     textAlign: 'center',
+    textDecorationLine: 'underline',
   },
   cameraPreviewContainer: {
-    height: 540,
+    height: 500,
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
+    marginBottom: 30,
   },
   cameraPreviewOption1: {
-    flex: 0.2,
+    flex: 1,
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
   cameraPreviewOption2: {
-    flex: 0.2,
+    flex: 1,
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
   cameraPreviewOption3: {
-    flex: 0.2,
+    flex: 1,
     alignSelf: 'flex-end',
     alignItems: 'center',
   },
   cameraPreviewOptionText1: {
     fontSize: 20, 
     color: 'white',
-    marginBottom: 30,
+    backgroundColor: 'black',
+    borderColor: '#00974E',
+    borderWidth: 1,
+    borderRadius: 100,
+    padding: 10,
   },
   cameraPreviewOptionText2: {
     fontSize: 20, 
-    color: 'white',
-    marginLeft: 20,
-    marginBottom: 30,
+    color: 'black',
+    backgroundColor: 'black',
+    borderColor: '#00974E',
+    borderWidth: 1,
+    borderRadius: 100,
+    padding: 15,
   },
   cameraPreviewOptionText3: {
     fontSize: 20, 
     color: 'white',
-    marginLeft: 20,
-    marginBottom: 30,
+    backgroundColor: 'black',
+    borderColor: '#00974E',
+    borderWidth: 1,
+    borderRadius: 100,
+    padding: 10,
   }
 });
