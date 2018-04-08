@@ -27,7 +27,7 @@ export default class HomeScreen extends React.Component {
         <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
-              source={ require('../assets/images/Recycle-Bits-Logo.png')}
+              source={require('../assets/images/Recycle-Bits-Logo.png')}
               style={styles.welcomeImage}
             />
           </View>
@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
 }
 
 /*=================================================================================================
-// Home styling.
+// HomeScreen styling.
 =================================================================================================*/
 const styles = StyleSheet.create({
   container: {

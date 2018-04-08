@@ -8,12 +8,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import CameraComponent from './children/CameraComponent';
 
 export default class ScanItemScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
+  /*=================================================================================================
+  // The Scan Item screen will display a header and camera imagery for scanning. CameraComponent 
+  // handles the camera functionality.
+  =================================================================================================*/
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -24,14 +29,17 @@ export default class ScanItemScreen extends React.Component {
           />
         </View>
 
-        <View style={styles.scanContainer}>
-          <Text style={styles.scanButton}>Scan</Text>
-        </View>
+      <CameraComponent />
+
+
       </ScrollView>
     );
   }
 }
 
+/*=================================================================================================
+// ScanItemScreen styling.
+=================================================================================================*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -43,7 +51,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#9CC9A8',
     height: 80,
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 0,
   },
   headerLogoImage: {
     width: 260,
