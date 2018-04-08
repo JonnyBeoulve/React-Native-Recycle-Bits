@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import CameraComponent from './children/CameraComponent';
 
-export default class ScanItemScreen extends React.Component {
+export default class ScanScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -29,8 +29,7 @@ export default class ScanItemScreen extends React.Component {
           />
         </View>
 
-      <CameraComponent />
-
+        <CameraComponent />
 
       </ScrollView>
     );
@@ -38,7 +37,7 @@ export default class ScanItemScreen extends React.Component {
 }
 
 /*=================================================================================================
-// ScanItemScreen styling.
+// ScanScreen styling.
 =================================================================================================*/
 const styles = StyleSheet.create({
   container: {
@@ -59,28 +58,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 5,
   },
-  scanContainer: {
-    height: 300,
-    marginTop: 300,
-    marginBottom: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#9CC9A8',
-    paddingVertical: 20,
-  },
-  scanButton: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+  comingSoonImage: {
+    marginTop: 0
   }
 });

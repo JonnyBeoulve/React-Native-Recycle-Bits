@@ -33,14 +33,14 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleGitHubLink} style={styles.helpLink}>
+            <TouchableOpacity onPress={this.handleGitHubLink} style={styles.helpLink}>
               <Text style={styles.helpScanItem}>Visit the GitHub for this project.</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>Welcome!</Text>
+          <Text style={styles.tabBarInfoText}>Welcome, JonnyB!</Text>
         </View>
       </View>
     );
@@ -49,7 +49,7 @@ export default class HomeScreen extends React.Component {
   /*=================================================================================================
   // This will direct the user to the GitHub for the project.
   =================================================================================================*/
-  _handleGitHubLink = () => {
+  handleGitHubLink = () => {
     WebBrowser.openBrowserAsync('https://github.com/JonnyBeoulve/React-Native-Recycle-Bits');
   };
 }

@@ -6,7 +6,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Colors from '../constants/Colors';
 
 import HomeScreen from '../screens/HomeScreen';
-import ScanItemScreen from '../screens/ScanItemScreen';
+import ScanScreen from '../screens/ScanScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 export default TabNavigator(
@@ -14,8 +14,8 @@ export default TabNavigator(
     Home: {
       screen: HomeScreen,
     },
-    ScanItem: {
-      screen: ScanItemScreen,
+    Scan: {
+      screen: ScanScreen,
     },
     Profile: {
       screen: ProfileScreen,
@@ -33,7 +33,7 @@ export default TabNavigator(
                 ? `ios-home${focused ? '' : '-outline'}`
                 : 'md-home';
             break;
-          case 'ScanItem':
+          case 'Scan':
             iconName = Platform.OS === 'ios' 
               ? `ios-qr-scanner${focused ? '' : '-outline'}` 
               : 'md-qr-scanner';
