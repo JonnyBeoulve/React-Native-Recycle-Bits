@@ -40,11 +40,16 @@ export default class CameraComponent extends React.Component {
     const { hasCameraPermission } = this.state;
     const { scanned } = this.state;
     let iconCameraFlip;
+    let iconCameraScan;
     let iconCameraFlash;
 
     iconCameraFlip = Platform.OS === 'ios' 
       ? 'ios-switch'
       : 'md-switch';
+
+    iconCameraScan = Platform.OS === 'ios' 
+      ? 'ios-camera'
+      : 'md-camera';
 
     iconCameraFlash = Platform.OS === 'ios' 
       ? 'ios-flash'
@@ -60,7 +65,7 @@ export default class CameraComponent extends React.Component {
           <View style={styles.flex}>
             <Image source={require('../../assets/images/Coming_Soon.jpg')} style={styles.comingSoonImage}/>
             <View style={styles.comingSoonTextContainer}>
-              <Text onPress={this.handleScanAgain} style={styles.comingSoonText}>Coming Soon. Click to scan again.</Text>
+              <Text onPress={this.handleScanAgain} style={styles.comingSoonText}>Feature coming soon. Click to scan again.</Text>
              </View>
           </View>
         );
@@ -74,10 +79,7 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handleCameraFlip}
                   >
                   <Text style={styles.cameraPreviewOptionText1}>
-                    {'  '}<Ionicons
-                      name={iconCameraFlip}
-                      size={17}
-                    />{'  '}
+                    {'  '}<Ionicons name={iconCameraFlip} size={18} />{'  '}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -85,7 +87,7 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handlePhotoScan}
                   >
                   <Text style={styles.cameraPreviewOptionText2}>
-                    {' '}...{' '}
+                    {' '}<Ionicons name={iconCameraScan} size={20} />{' '}
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -93,10 +95,7 @@ export default class CameraComponent extends React.Component {
                   onPress={this.handleFlashToggle}
                   >
                   <Text style={styles.cameraPreviewOptionText3}>
-                    {'  '}<Ionicons
-                      name={iconCameraFlash}
-                      size={17}
-                    />{'  '}
+                    {'  '}<Ionicons name={iconCameraFlash} size={18} />{'  '}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -215,16 +214,16 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     color: 'white',
     backgroundColor: 'black',
-    borderColor: '#00974E',
+    borderColor: '#9CC9A8',
     borderWidth: 1,
     borderRadius: 100,
     padding: 10,
   },
   cameraPreviewOptionText2: {
     fontSize: 20, 
-    color: 'black',
+    color: 'white',
     backgroundColor: 'black',
-    borderColor: '#00974E',
+    borderColor: '#9CC9A8',
     borderWidth: 1,
     borderRadius: 100,
     padding: 15,
@@ -233,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     color: 'white',
     backgroundColor: 'black',
-    borderColor: '#00974E',
+    borderColor: '#9CC9A8',
     borderWidth: 1,
     borderRadius: 100,
     padding: 10,

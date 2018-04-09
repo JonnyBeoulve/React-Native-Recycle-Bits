@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -16,10 +17,17 @@ export default class ProfileScreen extends React.Component {
   };
 
   /*=================================================================================================
-  // The profile screen contains information about the user. In a future update, the user will be
-  // able to compare how much they recycled to other users in the community.
+  // The profile screen contains information about the user along with a link to the project's GitHub
+  // repository. In a future update, the user will b able to compare how much they recycled to other 
+  // users in the community.
   =================================================================================================*/
   render() {
+    let iconLocationCircle;
+
+    iconLocationCircle = Platform.OS === 'ios' 
+      ? 'ios-pin'
+      : 'md-pin';
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.headerContainer}>
@@ -35,19 +43,17 @@ export default class ProfileScreen extends React.Component {
               style={styles.profileImage}
           />
           <Text style={styles.profileUser}>JonnyB</Text>
-          <Text style={styles.profileLocation}>Seattle, WA</Text>
-          <Text style={styles.profileRecycleCount}>Number of items recycled: 4</Text>
-          <Text style={styles.profileLastTimeRecycled}>Last time recycled: 4/6/2018</Text>
-          <View style={styles.profileAboutMeContainer}>
-            <Text style={styles.profileAboutMeHeader}>About Me</Text>
-            <Text style={styles.profileAboutMe}>Save the Earth. It's the only planet with chocolate.</Text>
-          </View>
+          <Text style={styles.profileLocationText}>Seattle, WA</Text>
+          <Text style={styles.profileRecycleCount}>4</Text>
+          <Text style={styles.profileRecycleCountText}>Items Recycled</Text>
+          <Text style={styles.profileLastTimeRecycled}>4/6/2018</Text>
+          <Text style={styles.profileLastTimeRecycledText}>Last Recycled</Text>
         </View>
 
         
-        <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this.handleGitHubLink} style={styles.helpLink}>
-              <Text style={styles.helpScanItem}>Visit the GitHub for this project.</Text>
+        <View style={styles.linkContainer}>
+            <TouchableOpacity onPress={this.handleGitHubLink} style={styles.linkOpacity}>
+              <Text style={styles.linkText}>Visit the GitHub for this project.</Text>
             </TouchableOpacity>
           </View>
         
@@ -55,7 +61,7 @@ export default class ProfileScreen extends React.Component {
     );
   }
   /*=================================================================================================
-  // This will direct the user to the project's GitHub repository.
+  // This will direct the user to the project's GitHub repository in a browser window.
   =================================================================================================*/
   handleGitHubLink = () => {
     WebBrowser.openBrowserAsync('https://github.com/JonnyBeoulve/React-Native-Recycle-Bits');
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#f7f7f7',
   },
   headerContainer: {
     alignItems: 'center',
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     alignItems: 'center',
     marginTop: 20,
-    height: 300,
+    height: 400,
     marginTop: 40,
   },
   profileImage: {
@@ -102,40 +108,33 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 24,
   },
-  profileLocation: {
+  profileLocationText: {
     color: '#aaa',
   },
   profileRecycleCount: {
+    marginTop: 10,
+    fontSize: 34,
+  },
+  profileRecycleCountText: {
     marginTop: 10,
     fontSize: 17,
   },
   profileLastTimeRecycled: {
     marginTop: 10,
-    fontSize: 17,
+    fontSize: 34,
   },
-  profileAboutMeContainer: {
-    alignItems: 'center',
+  profileLastTimeRecycledText: {
     marginTop: 10,
-  },
-  profileAboutMeHeader: {
-    fontWeight: 'bold',
     fontSize: 17,
   },
-  profileAboutMe: {
-    textAlign: 'center',
-    marginTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    fontSize: 17,
-  },
-  helpContainer: {
+  linkContainer: {
     marginTop: 15,
     alignItems: 'center',
   },
-  helpLink: {
+  linkOpacity: {
     paddingVertical: 15,
   },
-  helpScanItem: {
+  linkText: {
     fontSize: 18,
     color: '#75CDDD',
     textDecorationLine: 'underline',

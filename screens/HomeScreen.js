@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -17,22 +17,32 @@ export default class HomeScreen extends React.Component {
   };
 
   /*=================================================================================================
-  // The home page will render the logo, a clickable link to visit the scan page, the navigation
-  // bar, as well as a welcome message.
+  // The home page will render the logo, a random fact about recycling (randomization will be
+  // added in a future update), and a welcome message. Eventually, this page will serve as a hub
+  // with news, user activity, and more.
   =================================================================================================*/
   render() {
+    let iconInfoCircle;
+
+    iconInfoCircle = Platform.OS === 'ios' 
+      ? 'ios-information-circle'
+      : 'md-information-circle';
+
     return (
       <View style={styles.container}>
         <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
-              source={require('../assets/images/Recycle-Bits-Logo.png')}
+              source={require('../assets/images/Recycle_Bits_Logo.png')}
               style={styles.welcomeImage}
             />
           </View>
 
           <View style={styles.recyclingFactContainer}>
-            <Text style={styles.recyclingFact}>In less than 15 years, worldwide waste is expected to double.</Text>
+            <Text style={styles.iconInfo}>
+              <Ionicons name={iconInfoCircle} size={28}/>
+            </Text>
+            <Text style={styles.recyclingFact}>Aluminum is 100 percent recyclable and retains its properties indefinitely. Nearly 33 percent of aluminum nationwide ends up in landfills.</Text>
           </View>
         </View>
 
@@ -91,7 +101,7 @@ const styles = StyleSheet.create({
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: '#b3ffd9',
     lineHeight: 24,
     textAlign: 'center',
   },
@@ -125,17 +135,19 @@ const styles = StyleSheet.create({
   },
   recyclingFactContainer: {
     alignItems: 'center',
-    backgroundColor: '#9CC9A8',
     height: 120,
-    marginTop: 10,
+    marginTop: 30,
     marginBottom: 0,
     paddingLeft: 20,
     paddingRight: 20,
   },
+  iconInfo: {
+    color: '#e6fff2',
+  },
   recyclingFact: {
     textAlign: 'center',
-    marginTop: 20,
-    fontSize: 20,
-    color: '#fff',
+    marginTop: 10,
+    fontSize: 17,
+    color: '#e6fff2',
   }
 });
