@@ -31,13 +31,10 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require('./assets/images/Coming_Soon.jpg'),
         require('./assets/images/icon.png'),
         require('./assets/images/JonnyB_Avatar.jpg'),
-        require('./assets/images/Recycle_Bits_Black.png'),
         require('./assets/images/Recycle_Bits_Black_Landscape.png'),
-        require('./assets/images/Recycle_Bits_White_Landscape.png'),
-        require('./assets/images/Recycle_Bits_Logo.png'),
+        require('./assets/images/Recycle_Bits_Black.png'),
         require('./assets/images/splash.png'),
       ]),
       Font.loadAsync({

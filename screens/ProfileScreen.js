@@ -75,20 +75,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#dee2e5',
   },
   headerContainer: {
     alignItems: 'center',
     backgroundColor: '#9CC9A8',
-    height: 80,
+    height: 60,
     marginTop: 10,
     marginBottom: 0,
     borderBottomColor: '#00974E',
     borderBottomWidth: 1,
   },
   headerLogoImage: {
-    width: 260,
-    height: 70,
+    width: 220,
+    height: 50,
     resizeMode: 'contain',
     marginTop: 5,
   },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 18,
-    color: '#75CDDD',
+    color: '#9CC9A8',
     textDecorationLine: 'underline',
   },
 });

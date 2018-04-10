@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component {
         <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
-              source={require('../assets/images/Recycle_Bits_Logo.png')}
+              source={require('../assets/images/Recycle_Bits_Black.png')}
               style={styles.welcomeImage}
             />
           </View>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { 
+  Button,
   Image,
   Platform,
   StyleSheet,
@@ -7,15 +8,18 @@ import {
   TouchableOpacity,
   View 
 } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Camera, FileSystem, Permissions } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
 export default class CameraComponent extends React.Component {
   /*=================================================================================================
   // This component's state will store the current permissions level, whether the front of
-  // back facing camera is used, and a flash toggle.
+  // back facing camera is used, a flash toggle, and whether or not a user has taken a photo
+  // (scanned). If so, the component will render results instead of the camera. Cached Photo will
+  // hold a photo upon the user clicks scan.
   =================================================================================================*/
   state = {
+    cachedPhoto: null,
     flashMode: Camera.Constants.FlashMode.off,
     hasCameraPermission: null,
     scanned: false,
@@ -23,7 +27,7 @@ export default class CameraComponent extends React.Component {
   };
 
   /*=================================================================================================
-  // Upon mounting permissions to access the camera will be required. If not, a message will be
+  // Upon will mount permissions to access the camera will be required. If not, a message will be
   // displayed to the user.
   =================================================================================================*/
   async componentWillMount() {
@@ -34,7 +38,8 @@ export default class CameraComponent extends React.Component {
   /*=================================================================================================
   // Here we will first render a view depending upon whether or not the user has granted 
   // camera permissions. If so, the user will be able to user their camera to take a photo,
-  // flip the camera, and turn on flash.
+  // flip the camera, and turn on flash. There is also some icon related code here that displays
+  // icons on the three camera buttons (flip, scan, and flash).
   =================================================================================================*/
   render() {
     const { hasCameraPermission } = this.state;
@@ -62,17 +67,24 @@ export default class CameraComponent extends React.Component {
     } else {
       if (scanned) {
         return (
-          <View style={styles.flex}>
-            <Image source={require('../../assets/images/Coming_Soon.jpg')} style={styles.comingSoonImage}/>
-            <View style={styles.comingSoonTextContainer}>
-              <Text onPress={this.handleScanAgain} style={styles.comingSoonText}>Feature coming soon. Click to scan again.</Text>
-             </View>
+          <View style={styles.resultsContainer}>
+            <Image source={this.state.cachedPhoto} style={styles.scannedPhoto}/>
+            <View style={styles.resultsTextContainer}>
+              <Text style={styles.resultsRecyclable}>Yes, it's recyclable!</Text>
+              <Text style={styles.resultsMaterial}>Material: Aluminum</Text>
+              <Text style={styles.resultsValue}>Estimated Value: $00.15</Text>
+            </View>
+            <View style={styles.scanAgainContainer}>
+              <View style={styles.scanAgainButtonContainer}>
+                <Button onPress={this.handleScanAgain} title="Scan Another Item" color="#9CC9A8" />
+              </View>
+            </View>
           </View>
         );
       } else {
         return (
           <View style={styles.flex}>
-            <Camera style={styles.flex} type={this.state.type}>
+            <Camera ref={ref => { this.camera = ref; }} style={styles.flex} type={this.state.type}>
               <View style={styles.cameraPreviewContainer}>
                 <TouchableOpacity
                   style={styles.cameraPreviewOption1}
@@ -84,7 +96,7 @@ export default class CameraComponent extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.cameraPreviewOption2}
-                  onPress={this.handlePhotoScan}
+                  onPress={this.handlePhotoScan.bind(this)}
                   >
                   <Text style={styles.cameraPreviewOptionText2}>
                     {' '}<Ionicons name={iconCameraScan} size={20} />{' '}
@@ -118,13 +130,18 @@ export default class CameraComponent extends React.Component {
   }
 
   /*=================================================================================================
-  // In production this function will submit a captured image to the database to be analyzed
-  // before the user is presented with information.
+  // Upon clicking the scan button, this function will pass the photo to state to then be rendered
+  // on the results screen.
   =================================================================================================*/
-  handlePhotoScan = () => {
-    this.setState({
-      scanned: true
-    });
+  handlePhotoScan = async function() {
+      if (this.camera) {
+        let photo = await this.camera.takePictureAsync();
+        this.setState({
+          cachedPhoto: photo,
+          scanned: true
+        });
+      }
+
   }
 
   /*=================================================================================================
@@ -139,8 +156,7 @@ export default class CameraComponent extends React.Component {
   }
 
   /*=================================================================================================
-  // Upon arriving at the coming soon image, the user can press a button on the bottom to go back to the
-  // Scan screen
+  // Upon arriving at the results page, users can click a link on the bottom to scan another item.
   =================================================================================================*/
   handleScanAgain = () => {
     this.setState({
@@ -150,43 +166,52 @@ export default class CameraComponent extends React.Component {
 }
 
 /*=================================================================================================
-// ScanItemScreen styling.
+// CameraComponent styling.
 =================================================================================================*/
 const styles = StyleSheet.create({
   flex : {
     flex: 1,
   },
-  comingSoonImage: {
-    left: 10,
-    width: 390,
-    height: 530,
+  resultsContainer: {
+    alignItems: 'center',
+    backgroundColor: '#dee2e5',
+  },
+  scannedPhoto: {
+    height: 340,
     resizeMode: 'contain',
   },
-  comingSoonTextContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+  resultsTextContainer: {
+    height: 140,
+    width: '100%',
+    backgroundColor: '#dee2e5',
+    marginBottom: 10,
   },
-  comingSoonText: {
-    fontSize: 17,
-    color: '#75CDDD',
+  resultsRecyclable: {
+    marginTop: 10,
+    marginBottom: 5,
+    fontSize: 24,
     textAlign: 'center',
-    textDecorationLine: 'underline',
+  },
+  resultsMaterial: {
+    marginTop: 5,
+    marginBottom: 5,
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  resultsValue: {
+    marginTop: 5,
+    marginBottom: 0,
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  scanAgainContainer: {
+    height: 70,
+    width: '100%',
+    alignItems: 'center',
+  },
+  scanAgainButtonContainer: {
+    width: 180,
+    alignItems: 'center',
   },
   cameraPreviewContainer: {
     height: 500,
