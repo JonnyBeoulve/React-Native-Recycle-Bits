@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Colors from '../constants/Colors';
 import { WebBrowser } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -79,11 +80,11 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
-    backgroundColor: '#9CC9A8',
+    backgroundColor: Colors.primaryColor,
     height: 60,
     marginTop: 10,
     marginBottom: 0,
-    borderBottomColor: '#00974E',
+    borderBottomColor: Colors.primaryColorDark,
     borderBottomWidth: 1,
   },
   headerLogoImage: {
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 18,
-    color: '#9CC9A8',
+    color: Colors.primaryColor,
     textDecorationLine: 'underline',
   },
 });

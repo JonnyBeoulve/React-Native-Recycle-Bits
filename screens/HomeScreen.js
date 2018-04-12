@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 
 export default class HomeScreen extends React.Component {
@@ -60,7 +60,7 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9CC9A8',
+    backgroundColor: Colors.primaryColor,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -142,12 +142,12 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   iconInfo: {
-    color: '#e6fff2',
+    color: Colors.primaryTextColor,
   },
   recyclingFact: {
     textAlign: 'center',
     marginTop: 10,
     fontSize: 17,
-    color: '#e6fff2',
+    color: Colors.primaryTextColor,
   }
 });

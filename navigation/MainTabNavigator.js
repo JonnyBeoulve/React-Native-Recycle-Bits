@@ -9,6 +9,12 @@ import HomeScreen from '../screens/HomeScreen';
 import ScanScreen from '../screens/ScanScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
+/*=================================================================================================
+// The navigation, which is located at the bottom of the app, includes the Home Screen where
+// the user first arrives, the scan screen where camera functionality is located, and the profile
+// screen where the user can view their profile information and eventually access 
+// leaderboard functionality.
+=================================================================================================*/
 export default TabNavigator(
   {
     Home: {

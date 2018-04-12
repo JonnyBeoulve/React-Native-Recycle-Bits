@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CameraComponent from './children/CameraComponent';
+import Colors from '../constants/Colors';
+
+import CameraComponent from '../components/CameraComponent';
 
 export default class ScanScreen extends React.Component {
   static navigationOptions = {
@@ -47,11 +49,11 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
-    backgroundColor: '#9CC9A8',
+    backgroundColor: Colors.primaryColor,
     height: 60,
     marginTop: 10,
     marginBottom: 0,
-    borderBottomColor: '#00974E',
+    borderBottomColor: Colors.primaryColorDark,
     borderBottomWidth: 1,
   },
   headerLogoImage: {

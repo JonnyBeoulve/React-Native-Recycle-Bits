@@ -9,6 +9,7 @@ import {
   View 
 } from 'react-native';
 import { Camera, FileSystem, Permissions } from 'expo';
+import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 
 export default class CameraComponent extends React.Component {
@@ -42,11 +43,8 @@ export default class CameraComponent extends React.Component {
   // icons on the three camera buttons (flip, scan, and flash).
   =================================================================================================*/
   render() {
-    const { hasCameraPermission } = this.state;
-    const { scanned } = this.state;
-    let iconCameraFlip;
-    let iconCameraScan;
-    let iconCameraFlash;
+    const { hasCameraPermission, scanned } = this.state;
+    let iconCameraFlip, iconCameraScan, iconCameraFlash;
 
     iconCameraFlip = Platform.OS === 'ios' 
       ? 'ios-switch'
@@ -76,7 +74,7 @@ export default class CameraComponent extends React.Component {
             </View>
             <View style={styles.scanAgainContainer}>
               <View style={styles.scanAgainButtonContainer}>
-                <Button onPress={this.handleScanAgain} title="Scan Another Item" color="#9CC9A8" />
+                <Button onPress={this.handleScanAgain} title="Scan Another Item" color={Colors.primaryColor} />
               </View>
             </View>
           </View>
@@ -214,7 +212,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cameraPreviewContainer: {
-    height: 500,
+    height: 520,
     flex: 1,
     backgroundColor: 'transparent',
     flexDirection: 'row',
@@ -239,7 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     color: 'white',
     backgroundColor: 'black',
-    borderColor: '#9CC9A8',
+    borderColor: Colors.primaryColor,
     borderWidth: 1,
     borderRadius: 100,
     padding: 10,
@@ -248,7 +246,7 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     color: 'white',
     backgroundColor: 'black',
-    borderColor: '#9CC9A8',
+    borderColor: Colors.primaryColor,
     borderWidth: 1,
     borderRadius: 100,
     padding: 15,
@@ -257,7 +255,7 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     color: 'white',
     backgroundColor: 'black',
-    borderColor: '#9CC9A8',
+    borderColor: Colors.primaryColor,
     borderWidth: 1,
     borderRadius: 100,
     padding: 10,
